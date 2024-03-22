@@ -14,14 +14,11 @@ module.exports = {
       },
       fontFamily: {
         'display': ['Caviar Dreams'],
+        'title' : ['American Captain']
       },
-      keyframes: {
-        reveal: {
-          '0' : {opacity: 0, translate: '1000 0px'},
-          '100' : {opacity: 1, translate: '0 0'}
-        }
-      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-animated')
+  ],
 }

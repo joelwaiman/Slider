@@ -1,68 +1,72 @@
 'use client'
+
 import { useState } from "react";
+
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { RxDotFilled } from "react-icons/rx";
+
 
 export default function Home() {
 
-  const [city, setCity] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [weather, setWeather] = useState({});
+  const [currentSlider, setCurrentSlider] = useState(0);
 
-  const API_KEY = "29a4f62cca9148b1aa7175615241501"
-  const getWeather = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`);
-      const data = await response.json();
-      setWeather({
-        city: data.location.name,
-        country: data.location.country,
-        condition: data.current.condition.text,
-        icon: data.current.condition.icon,
-        temp: data.current.temp_c,
-      });
-    } catch (error) {
-      console.error('Error fetching weather data:', error);
-    } finally {
-      setLoading(false);
-      setCity('')
-    }
+  const slider = [
+    { title: 'Iceland', url: '/iceland-bg.webp' },
+    { title: 'Maldives', url: '/maldives-bg.webp' },
+    { title: 'Thailand', url: '/thailand-bg.webp' },
+    { title: 'Costa Rica', url: '/costa-rica-bg.webp' },
+  ]
+
+  const nextSlide = () => {
+    const newIndex = currentSlider === slider.length - 1 ?
+      0 : currentSlider + 1;
+    setCurrentSlider(newIndex)
+  };
+
+  const prevSlide = () => {
+    const newIndex = currentSlider === 0 ?
+      slider.length - 1 : currentSlider - 1;
+    setCurrentSlider(newIndex)
+  }
+
+  const goToSlide = (slideIndex) => {
+    setCurrentSlider(slideIndex)
   }
 
   return (
-    <main className="h-screen flex flex-col justify-center items-center gap-y-12">
-      {!weather.city ?
-        <section className="flex flex-col font-display justify-center items-center max-h-[50%]">
-          <img src="/sadCloud.webp"
-            className="max-w-xs opacity-50"/>
-          <p className="text-white ">Realiza una busqueda</p>
-        </section>
-        :
-        <section className="flex flex-col font-display justify-center items-center max-h-[50%] gap-2">
-          <p className="text-3xl transition ease-in-out delay-700">{weather.city}, {weather.country}</p>
-          <img className="w-4/12" 
-          src={weather.icon} 
-          alt={weather.temp} />
-          <p className="text-3xl">
-            {weather.temp}°C
-            </p>
-          <p>{weather.condition}</p>
-        </section>
-      }
-      <form className="flex flex-col items-center gap-4 w-5/6">
-        <input
-          className="text-black rounded-lg p-2 h-10 w-5/6"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter city"
-        />
-        <button
-          className="bg-sky-400 rounded-lg p-2 h-10 w-5/6"
-          type="button"
-          onClick={() => getWeather()}
-          disabled={city === ''}>
-          Buscar
+    <main className="min-h-screen bg-cover bg-no-repeat duration-500"
+      style={{ backgroundImage: `url(${slider[currentSlider].url}` }}>
+      <section className="flex flex-col items-center justify-center min-h-screen">
+        <div className="flex items-center min-h-[30vh] group">
+          <IoIosArrowBack 
+          className="hidden group-hover:block hover:text-gray-50 cursor-pointer w-[20vh] text-gray-50/60 min-h-[25vh] animate-fade"
+          onClick={prevSlide} />
+
+          <p className="font-title text-transparent w-[761px] text-center bg-clip-text bg-gradient-to-t from-transparent from-20% to-gray-100 to-70% text-[200px] tracking-[7px] m-4">
+            {slider[currentSlider].title}
+          </p>
+
+          <IoIosArrowForward
+          className="hidden group-hover:block hover:text-gray-50 cursor-pointer w-[20vh] text-gray-50/60 min-h-[30vh] animate-fade" 
+          onClick={nextSlide} />
+        </div>
+
+        <button className="bg-gray-300/60 py-1.5 px-6 rounded-3xl">
+          EXPLORE
         </button>
-      </form>
+
+        <div className="flex top-4 justify-center p-4">
+          {slider.map((slide, slideIndex) => {
+            return <div
+              key={slide}
+              onClick={() => goToSlide(slideIndex)}
+              className={slideIndex === currentSlider ? "flex items-center justify-center w-[100px] text-9xl cursor-pointer transition-all duration-500 h-20" : "flex items-center justify-center w-[100px] text-gray-50/50 text-5xl cursor-pointer transition-all duration-500 h-20"}>
+              <RxDotFilled />
+            </div>
+          })}
+        </div>
+      </section>
+
     </main>
   )
 }
