@@ -14,7 +14,7 @@ module.exports = {
       },
       fontFamily: {
         'display': ['Caviar Dreams'],
-        'title' : ['American Captain']
+        'title' : ['Anton']
       },
     },
   },

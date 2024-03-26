@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Weather by me',
+  title: 'Zzzlider',
   description: 'Idk men',
 }
 
