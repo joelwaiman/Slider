@@ -50,7 +50,7 @@ export default function Home() {
               className="hidden sm:group-hover:block hover:text-gray-50/80 cursor-pointer w-[20vh] text-gray-50/40 min-h-[30vh] animate-fade"
               onClick={prevSlide} />
 
-            <p className="font-[Anton] content-center w-[700px] h-[240px] text-center text-[80px] sm:text-[150px] tracking-[7px] sm:m-4 animate-fade-down"
+            <p className="font-title content-center w-[700px] h-[240px] text-center text-[80px] sm:text-[150px] tracking-[7px] sm:m-4 animate-fade-down"
               key={currentSlider}>
               {slider[currentSlider].title}
             </p>
