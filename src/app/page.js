@@ -50,7 +50,7 @@ export default function Home() {
               className="hidden sm:group-hover:block hover:text-gray-50/80 cursor-pointer w-[20vh] text-gray-50/40 min-h-[30vh] animate-fade"
               onClick={prevSlide} />
 
-            <p className="font-title content-center w-[700px] h-[240px] text-center text-[80px] sm:text-[150px] tracking-[7px] sm:m-4 animate-fade-down"
+            <p className="font-[Anton] content-center w-[700px] h-[240px] text-center text-[80px] sm:text-[150px] tracking-[7px] sm:m-4 animate-fade-down"
               key={currentSlider}>
               {slider[currentSlider].title}
             </p>
@@ -60,7 +60,7 @@ export default function Home() {
               onClick={nextSlide} />
           </div>
 
-          <button className="bg-[#364649] hover:bg-[#708f96] transition duration-300 ease-out py-1.5 px-6 rounded-3xl w-[150px]">
+          <button className="bg-[#364649] tracking-[1px] hover:bg-[#708f96] transition duration-300 ease-out py-1.5 px-6 rounded-3xl w-[150px]">
             EXPLORE
           </button>
 

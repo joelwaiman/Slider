@@ -17,7 +17,7 @@ export function Footer() {
                 })}
             </div>
 
-            <a className="text-xl font-display hover:scale-[1.175] hover:text-[#708f96] duration-300" 
+            <a className="text-xl hover:scale-[1.175] hover:text-[#708f96] duration-300" 
             href="/">About us</a>
         </footer>
     )
